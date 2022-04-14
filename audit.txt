@@ -1,0 +1,3 @@
+2022-04-09T23:48:23.514 :  + The NEW employee Anna  Uspenskaya with ID: dev00 joined the company.
+2022-04-09T23:50:33.553 :  + The NEW employee Sam Smith with ID: sal00 joined the company.
+2022-04-09T23:51:41.609 :  - The employee Sam Smith with ID: sal00 was REMOVED FROM the company.
