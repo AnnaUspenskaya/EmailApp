@@ -16,6 +16,9 @@ public interface EmailDao {
     
     Employee addEmployee (String employeeId, Employee employee) throws EmployeePersistenceException;
     
+    Employee updateEmp (String employeeId, Employee emp) throws EmployeePersistenceException;
+
+    
     List<Employee> getAllEmployee() throws EmployeePersistenceException;
     
     Employee getEmployee(String employeeId) throws EmployeePersistenceException;

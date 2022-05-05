@@ -14,17 +14,22 @@ import java.util.List;
  * @author anechka
  */
 public interface EmailServiceLayer {
-    void addEmployee(Employee emoloyee) throws 
+
+    void addEmployee(Employee emoloyee) throws
             EmployeeDataValidationException,
             EmployeePersistenceException;
-    List<Employee> getAllEmployees() throws 
+
+    void updateEmployee(String id, Employee emp) throws
+            EmployeeDataValidationException,
             EmployeePersistenceException;
-    
-    Employee getEmployee(String id) throws 
+
+    List<Employee> getAllEmployees() throws
             EmployeePersistenceException;
-    
+
+    Employee getEmployee(String id) throws
+            EmployeePersistenceException;
+
     Employee removeEmployee(String id) throws
             EmployeePersistenceException;
-            
-    
+
 }

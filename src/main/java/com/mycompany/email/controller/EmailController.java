@@ -56,6 +56,9 @@ private EmailServiceLayer service;
                         removeEmployee();
                         break;
                     case 5:
+                        updateEmployee();
+                        break;
+                    case 6:
                         keepGoing = false;
                         break;
                     default:
@@ -91,6 +94,26 @@ private EmailServiceLayer service;
         }
     }while(hasErrors);
 }
+        private void updateEmployee() throws EmployeePersistenceException {
+        view.displayUpdateEmployeeBanner();
+        boolean hasErrors = false; 
+        do{
+                    String id= view.getEmployeeIdChoice();
+                    Employee updatedEmp = view.updateEmpl(service.getEmployee(id));
+                    
+                    
+
+        try {
+            service.updateEmployee(id, updatedEmp);
+            view.displayUpdateSuccessBanner();
+            hasErrors =false;
+        }catch (EmployeeDataValidationException e){
+            hasErrors = true;
+            view.displayErrorMessage(e.getMessage());
+        }
+    }while(hasErrors);
+}
+    
        
 
     private void listEmployee() throws EmployeePersistenceException {

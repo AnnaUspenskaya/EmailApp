@@ -28,14 +28,28 @@ public class EmailServiceLayerImpl implements EmailServiceLayer{
     @Override
     public void addEmployee(Employee emp) throws EmployeeDataValidationException, EmployeePersistenceException {
         
+        
         validateEmployeeData(emp);
 //if all the fields are filled, persist the object Employee
 
 dao.addEmployee(emp.getEmployeeId(), emp); 
 
 //The employee is created, write into the audit log
+
 audit.writeAuditEntry(" + The NEW employee "+ emp.getFirstName()+ " "+ emp.getLastName()
 +" with ID: "+emp.getEmployeeId() + " joined the company.");
+    }
+    
+    @Override
+    public void updateEmployee (String id, Employee emp) throws EmployeeDataValidationException, EmployeePersistenceException {
+                validateEmployeeData(emp);
+//if all the fields are filled, persist the object Employee
+
+dao.updateEmp(emp.getEmployeeId(), emp);
+
+//The employee is created, write into the audit log
+audit.writeAuditEntry(" 0 The  employee "+ emp.getFirstName()+ " "+ emp.getLastName()
++" with ID: "+emp.getEmployeeId() + " has been updated.");
     }
 
     @Override

@@ -17,20 +17,22 @@ public class EmailView {
 
     UserIO io;
 
-    public EmailView(UserIO io){
+    public EmailView(UserIO io) {
         this.io = io;
     }
-    
+
     int idNum = 0;
+
     public int printMenuAndGetSelection() {
         io.print("Main Menu");
         io.print("1. List Employees");
         io.print("2. Create New Employee");
         io.print("3. View an Employee");
         io.print("4. Remove an Employee");
-        io.print("5. Exit");
+        io.print("5. Update an Employee");
+        io.print("6. Exit");
 
-        return io.readInt("Please select form the above choices", 1, 5);
+        return io.readInt("Please select form the above choices", 1, 6);
     }
 
     public Employee getNewEmployeeInfo() {
@@ -42,7 +44,31 @@ public class EmailView {
                 + "\n3 for Accounting "
                 + "\n Department code: ");
         String department = departmentChoice(depCode);
-        String EmpId = department.substring(0,3)+"0"+String.valueOf(idNum);
+        String EmpId = department.substring(0, 3) + "0" + String.valueOf(idNum);
+        Employee currentEmployee = new Employee(EmpId);
+        currentEmployee.setDepartment(department);
+        currentEmployee.setFirstName(firstName.trim());
+        currentEmployee.setLastName(lastName.trim());
+        currentEmployee.setEmail(currentEmployee.getFirstName().trim() + "." + currentEmployee.getLastName().trim() + "@" + currentEmployee.getDepartment() + ".mycompany.com");
+        currentEmployee.setPassword(randomPassword());
+        currentEmployee.setEmployeeId(EmpId);
+        idNum++;
+        displayEmployee(currentEmployee);
+        return currentEmployee;
+
+    }
+
+    public Employee updateEmpl( Employee emp) {
+    
+        String firstName = io.readString("▶ Please Enter first Name. (Current name: " + emp.getFirstName() + ")");
+        String lastName = io.readString("▶ Please Enter last Name. (Current last name: " + emp.getLastName() + ")");
+        int depCode = io.readInt("\n ▶ Enter the Department code "
+                + "\n1 for Sales "
+                + "\n2 for Development "
+                + "\n3 for Accounting "
+                + "\n Department code:  (Current department: " + emp.getDepartment() + ")");
+        String department = departmentChoice(depCode);
+        String EmpId = department.substring(0, 3) + "0" + String.valueOf(idNum);
         Employee currentEmployee = new Employee(EmpId);
         currentEmployee.setDepartment(department);
         currentEmployee.setFirstName(firstName);
@@ -53,7 +79,6 @@ public class EmailView {
         idNum++;
         displayEmployee(currentEmployee);
         return currentEmployee;
-        
 
     }
 //    private String email(String id, String dep ){
@@ -91,18 +116,16 @@ public class EmailView {
     }
 
     public void displayEmployeeList(List<Employee> employeeList) {
-        if (employeeList.isEmpty()){
+        if (employeeList.isEmpty()) {
             io.print("There is no employee in the company yet");
             io.print("☹");
 
-            
-        }else{
-                   for (Employee currentEmployee : employeeList) {
-            io.print(currentEmployee.getEmployeeId() + ": "
-                    + currentEmployee.getFirstName() + " " + currentEmployee.getLastName()
-
-            );
-        } 
+        } else {
+            for (Employee currentEmployee : employeeList) {
+ io.print(currentEmployee.getEmployeeId() + ": "
+                        + currentEmployee.getFirstName() + " " + currentEmployee.getLastName()
+                );
+            }
         }
 
         io.readString("Please hit enter to continue");
@@ -114,10 +137,10 @@ public class EmailView {
 
     public void displayEmployee(Employee employee) {
         if (employee != null) {
-            io.print("ID: "+employee.getEmployeeId());
-            io.print("Name: "+ employee.getFirstName() + " " + employee.getLastName());
-            io.print("Emal: "+employee.getEmail());
-            io.print("Email password: "+employee.getPassword());
+            io.print("ID: " + employee.getEmployeeId());
+            io.print("Name: " + employee.getFirstName() + " " + employee.getLastName());
+            io.print("Emal: " + employee.getEmail());
+            io.print("Email password: " + employee.getPassword());
 
         } else {
             io.print("No such employee");
@@ -147,6 +170,15 @@ public class EmailView {
         io.print("▶▶▶ Remove Employee ◀◀◀ \n");
     }
 
+    public void displayUpdateEmployeeBanner() {
+        io.print("▶▶▶ Update Employee ◀◀◀ \n");
+    }
+
+    public void displayUpdateSuccessBanner() {
+        io.readString(
+                " █ █ █ Employee successfully updated █ █ █  \n Please hit enter to continue");
+    }
+
     public void displayRemoveSuccessBanner() {
         io.readString(
                 " █ █ █ Employee successfully removed █ █ █  \n Please hit enter to continue");
@@ -159,10 +191,10 @@ public class EmailView {
     public void displayUnknownCommandBanner() {
         io.print("Unknown Command!!!");
     }
-    	public void displayErrorMessage(String errorMsg) {
-	    io.print("=== ERROR ===");
-	    io.print(errorMsg);
-	}
-	
+
+    public void displayErrorMessage(String errorMsg) {
+        io.print("=== ERROR ===");
+        io.print(errorMsg);
+    }
 
 }

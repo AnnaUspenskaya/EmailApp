@@ -35,6 +35,17 @@ public class EmailDaoFileImpl implements EmailDao {
         writeFile();
         return newEmployee;
     }
+    
+     @Override
+    public Employee updateEmp(String id, Employee employee) throws EmployeePersistenceException{
+              loadFile();
+       
+        
+        Employee emp =  employees.get(id);
+        Employee updatedEmp = employees.put(id, emp);
+        //1writeFile();
+        return updatedEmp;
+    }
 
     @Override
     public List<Employee> getAllEmployee() throws EmployeePersistenceException {
@@ -60,7 +71,7 @@ public class EmailDaoFileImpl implements EmailDao {
         Scanner sc;
         try {
             sc = new Scanner(new BufferedReader(new FileReader(EMAIL_FILE)));
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) { 
             throw new EmployeePersistenceException(
                     "Could not download Email list ", e);
         }
