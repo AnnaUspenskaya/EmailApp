@@ -35,29 +35,26 @@ public class EmailDaoFileImpl implements EmailDao {
         writeFile();
         return newEmployee;
     }
-    
-     @Override
-    public void updateEmp(int id, Employee emp) throws EmployeePersistenceException{
-              //loadFile();
-       
-        Map<Integer, Employee> currentEmp= new HashMap();
-        if(employees.containsKey(id)){
+
+    @Override
+    public void updateEmp(int id, Employee emp) throws EmployeePersistenceException {
+
+        if (employees.containsKey(id)) {
             employees.put(id, emp);
         }
-
         writeFile();
 
     }
 
     @Override
     public List<Employee> getAllEmployee() throws EmployeePersistenceException {
-       loadFile();
+        loadFile();
         return new ArrayList<Employee>(employees.values());
     }
 
     @Override
     public Employee getEmployee(int employeeId) throws EmployeePersistenceException {
-       loadFile();
+        loadFile();
         return employees.get(employeeId);
     }
 
@@ -73,7 +70,7 @@ public class EmailDaoFileImpl implements EmailDao {
         Scanner sc;
         try {
             sc = new Scanner(new BufferedReader(new FileReader(EMAIL_FILE)));
-        } catch (FileNotFoundException e) { 
+        } catch (FileNotFoundException e) {
             throw new EmployeePersistenceException(
                     "Could not download Email list ", e);
         }
@@ -104,8 +101,8 @@ public class EmailDaoFileImpl implements EmailDao {
         }
         List<Employee> employeeList = this.getAllEmployee();
         for (Employee currentEmployee : employeeList) {
-            out.println( currentEmployee.getEmployeeId()+DELIMITER
-                    +currentEmployee.getFirstName()+ DELIMITER
+            out.println(currentEmployee.getEmployeeId() + DELIMITER
+                    + currentEmployee.getFirstName() + DELIMITER
                     + currentEmployee.getLastName() + DELIMITER
                     + currentEmployee.getDepartment() + DELIMITER
                     + currentEmployee.getEmail() + DELIMITER

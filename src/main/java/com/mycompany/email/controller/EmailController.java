@@ -27,8 +27,8 @@ public class EmailController {
     //EmailView view = new EmailView();
     //EmailDao dao = new EmailDaoFileImpl();
     // Dependency Injection
-private EmailView view;
-private EmailServiceLayer service;
+    private EmailView view;
+    private EmailServiceLayer service;
 
     public EmailController(EmailServiceLayer service, EmailView view) {
         this.service = service;
@@ -62,7 +62,7 @@ private EmailServiceLayer service;
                         keepGoing = false;
                         break;
                     default:
-                        unknownCommand();            
+                        unknownCommand();
 
                 }
 
@@ -80,41 +80,38 @@ private EmailServiceLayer service;
 
     private void createEmployee() throws EmployeePersistenceException {
         view.displayCreateEmployeeBanner();
-        boolean hasErrors = false; 
-        do{
-                    Employee newEmployee = view.getNewEmployeeInfo();
+        boolean hasErrors = false;
+        do {
+            Employee newEmployee = view.getNewEmployeeInfo();
 
-        try {
-            service.addEmployee(newEmployee);
-            view.displayCreateSuccessBanner();
-            hasErrors =false;
-        }catch (EmployeeDataValidationException e){
-            hasErrors = true;
-            view.displayErrorMessage(e.getMessage());
-        }
-    }while(hasErrors);
-}
-        private void updateEmployee() throws EmployeePersistenceException {
+            try {
+                service.addEmployee(newEmployee);
+                view.displayCreateSuccessBanner();
+                hasErrors = false;
+            } catch (EmployeeDataValidationException e) {
+                hasErrors = true;
+                view.displayErrorMessage(e.getMessage());
+            }
+        } while (hasErrors);
+    }
+
+    private void updateEmployee() throws EmployeePersistenceException {
         view.displayUpdateEmployeeBanner();
-        boolean hasErrors = false; 
-        do{
-                    int id= view.getEmployeeIdChoice();
-                    Employee updatedEmp = view.updateEmpl(service.getEmployee(id));
-                    
-                    
+        boolean hasErrors = false;
+        do {
+            int id = view.getEmployeeIdChoice();
+            Employee updatedEmp = view.updateEmpl(service.getEmployee(id));
 
-        try {
-            service.updateEmployee(id, updatedEmp);
-            view.displayUpdateSuccessBanner();
-            hasErrors =false;
-        }catch (EmployeeDataValidationException e){
-            hasErrors = true;
-            view.displayErrorMessage(e.getMessage());
-        }
-    }while(hasErrors);
-}
-    
-       
+            try {
+                service.updateEmployee(id, updatedEmp);
+                view.displayUpdateSuccessBanner();
+                hasErrors = false;
+            } catch (EmployeeDataValidationException e) {
+                hasErrors = true;
+                view.displayErrorMessage(e.getMessage());
+            }
+        } while (hasErrors);
+    }
 
     private void listEmployee() throws EmployeePersistenceException {
         view.displayAllBanner();
