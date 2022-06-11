@@ -14,15 +14,15 @@ import java.util.List;
  */
 public interface EmailDao {
     
-    Employee addEmployee (String employeeId, Employee employee) throws EmployeePersistenceException;
+    Employee addEmployee (int employeeId, Employee employee) throws EmployeePersistenceException;
     
-    Employee updateEmp (String employeeId, Employee emp) throws EmployeePersistenceException;
+   public  void updateEmp (int id, Employee emp) throws EmployeePersistenceException;
 
     
     List<Employee> getAllEmployee() throws EmployeePersistenceException;
     
-    Employee getEmployee(String employeeId) throws EmployeePersistenceException;
+    Employee getEmployee(int employeeId) throws EmployeePersistenceException;
     
-    Employee removeEmployee(String employeeId) throws EmployeePersistenceException;
+    Employee removeEmployee(int employeeId) throws EmployeePersistenceException;
     
 }

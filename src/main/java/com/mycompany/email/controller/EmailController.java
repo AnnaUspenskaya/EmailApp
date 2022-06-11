@@ -98,7 +98,7 @@ private EmailServiceLayer service;
         view.displayUpdateEmployeeBanner();
         boolean hasErrors = false; 
         do{
-                    String id= view.getEmployeeIdChoice();
+                    int id= view.getEmployeeIdChoice();
                     Employee updatedEmp = view.updateEmpl(service.getEmployee(id));
                     
                     
@@ -124,14 +124,14 @@ private EmailServiceLayer service;
 
     private void viewEmployee() throws EmployeePersistenceException {
         view.displayEmployeeBanner();
-        String id = view.getEmployeeIdChoice();
+        int id = view.getEmployeeIdChoice();
         Employee emp = service.getEmployee(id);
         view.displayEmployee(emp);
     }
 
     private void removeEmployee() throws EmployeePersistenceException {
         view.displayRemoveEmployeeBanner();
-        String employeeId = view.getEmployeeIdChoice();
+        int employeeId = view.getEmployeeIdChoice();
         service.removeEmployee(employeeId);
         view.displayRemoveSuccessBanner();
     }

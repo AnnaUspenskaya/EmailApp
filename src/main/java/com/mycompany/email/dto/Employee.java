@@ -12,12 +12,12 @@ package com.mycompany.email.dto;
 public class Employee {
     private String firstName;
     private String lastName;
-    private String employeeId;
+    private Integer employeeId;
     private String department;
     private String password; 
     private String email;
 
-    	    public Employee(String employeeId) {
+    	    public Employee(int employeeId) {
 	        this.employeeId = employeeId;
 	    }
             
@@ -37,11 +37,11 @@ public class Employee {
         this.lastName = lastName;
     }
 
-    public String getEmployeeId() {
+    public int getEmployeeId() {
         return employeeId;
     }
 
-    public void setEmployeeId(String employeeId) {
+    public void setEmployeeId(int employeeId) {
         this.employeeId = employeeId;
     }
 

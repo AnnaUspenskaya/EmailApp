@@ -19,17 +19,17 @@ public interface EmailServiceLayer {
             EmployeeDataValidationException,
             EmployeePersistenceException;
 
-    void updateEmployee(String id, Employee emp) throws
+    void updateEmployee(int id, Employee emp) throws
             EmployeeDataValidationException,
             EmployeePersistenceException;
 
     List<Employee> getAllEmployees() throws
             EmployeePersistenceException;
 
-    Employee getEmployee(String id) throws
+    Employee getEmployee(int id) throws
             EmployeePersistenceException;
 
-    Employee removeEmployee(String id) throws
+    Employee removeEmployee(int id) throws
             EmployeePersistenceException;
 
 }

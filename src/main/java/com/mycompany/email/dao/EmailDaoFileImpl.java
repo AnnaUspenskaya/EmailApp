@@ -25,26 +25,28 @@ import java.util.Set;
  */
 public class EmailDaoFileImpl implements EmailDao {
 
-    private Map<String, Employee> employees = new HashMap<>();
+    private Map<Integer, Employee> employees = new HashMap<>();
     public static final String EMAIL_FILE = "EmployeeEmail.txt";
     public static final String DELIMITER = "::";
 
     @Override
-    public Employee addEmployee(String employeeId, Employee employee) throws EmployeePersistenceException {
+    public Employee addEmployee(int employeeId, Employee employee) throws EmployeePersistenceException {
         Employee newEmployee = employees.put(employeeId, employee);
         writeFile();
         return newEmployee;
     }
     
      @Override
-    public Employee updateEmp(String id, Employee employee) throws EmployeePersistenceException{
-              loadFile();
+    public void updateEmp(int id, Employee emp) throws EmployeePersistenceException{
+              //loadFile();
        
-        
-        Employee emp =  employees.get(id);
-        Employee updatedEmp = employees.put(id, emp);
-        //1writeFile();
-        return updatedEmp;
+        Map<Integer, Employee> currentEmp= new HashMap();
+        if(employees.containsKey(id)){
+            employees.put(id, emp);
+        }
+
+        writeFile();
+
     }
 
     @Override
@@ -54,13 +56,13 @@ public class EmailDaoFileImpl implements EmailDao {
     }
 
     @Override
-    public Employee getEmployee(String employeeId) throws EmployeePersistenceException {
+    public Employee getEmployee(int employeeId) throws EmployeePersistenceException {
        loadFile();
         return employees.get(employeeId);
     }
 
     @Override
-    public Employee removeEmployee(String employeeId) throws EmployeePersistenceException {
+    public Employee removeEmployee(int employeeId) throws EmployeePersistenceException {
         Employee removedEmployee = employees.remove(employeeId);
         writeFile();
         return removedEmployee;
@@ -80,7 +82,7 @@ public class EmailDaoFileImpl implements EmailDao {
         while (sc.hasNextLine()) {
             currentLine = sc.nextLine();
             currentTokens = currentLine.split(DELIMITER);
-            Employee currentEmployee = new Employee(currentTokens[0]);
+            Employee currentEmployee = new Employee(Integer.parseInt(currentTokens[0]));
             currentEmployee.setFirstName(currentTokens[1]);
             currentEmployee.setLastName(currentTokens[2]);
             currentEmployee.setDepartment(currentTokens[3]);

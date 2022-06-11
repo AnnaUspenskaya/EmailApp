@@ -41,7 +41,7 @@ audit.writeAuditEntry(" + The NEW employee "+ emp.getFirstName()+ " "+ emp.getLa
     }
     
     @Override
-    public void updateEmployee (String id, Employee emp) throws EmployeeDataValidationException, EmployeePersistenceException {
+    public void updateEmployee (int id, Employee emp) throws EmployeeDataValidationException, EmployeePersistenceException {
                 validateEmployeeData(emp);
 //if all the fields are filled, persist the object Employee
 
@@ -58,12 +58,12 @@ return dao.getAllEmployee();
     }
 
     @Override
-    public Employee getEmployee(String id) throws EmployeePersistenceException {
+    public Employee getEmployee(int id) throws EmployeePersistenceException {
 return dao.getEmployee(id);
     }
 
     @Override
-    public Employee removeEmployee(String id) throws EmployeePersistenceException {
+    public Employee removeEmployee(int id) throws EmployeePersistenceException {
         
 
 Employee removedEmp = dao.removeEmployee(id);

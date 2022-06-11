@@ -1,2 +1,0 @@
-acc00::John::Smith::accounting::John.Smith@accounting.mycompany.com::C&DF6NS55W
-dev00::Anna::Lena::development::Anna.Lena@development.mycompany.com::4Z&BUM7MN!

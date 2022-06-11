@@ -1,5 +1,0 @@
-2022-05-04T23:41:27.321 :  + The NEW employee John Smith with ID: acc00 joined the company.
-2022-05-04T23:42:21.574 :  + The NEW employee Amanda    Green with ID: sal01 joined the company.
-2022-05-04T23:44:16.044 :  + The NEW employee Anna Lena with ID: dev00 joined the company.
-2022-05-04T23:45:03.163 :  - The employee Amanda    Green with ID: sal01 was REMOVED from the company.
-2022-05-04T23:46:45.013 :  0 The  employee Anna Tompson with ID: dev01 has been updated.

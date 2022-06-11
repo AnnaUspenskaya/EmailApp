@@ -8,6 +8,7 @@ package com.mycompany.email.ui;
 import com.mycompany.email.dto.Employee;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -44,7 +45,8 @@ public class EmailView {
                 + "\n3 for Accounting "
                 + "\n Department code: ");
         String department = departmentChoice(depCode);
-        String EmpId = department.substring(0, 3) + "0" + String.valueOf(idNum);
+        Random ran = new Random();
+        int EmpId = ran.nextInt(900) + 100;
         Employee currentEmployee = new Employee(EmpId);
         currentEmployee.setDepartment(department);
         currentEmployee.setFirstName(firstName.trim());
@@ -58,8 +60,8 @@ public class EmailView {
 
     }
 
-    public Employee updateEmpl( Employee emp) {
-    
+    public Employee updateEmpl(Employee emp) {
+
         String firstName = io.readString("▶ Please Enter first Name. (Current name: " + emp.getFirstName() + ")");
         String lastName = io.readString("▶ Please Enter last Name. (Current last name: " + emp.getLastName() + ")");
         int depCode = io.readInt("\n ▶ Enter the Department code "
@@ -68,14 +70,16 @@ public class EmailView {
                 + "\n3 for Accounting "
                 + "\n Department code:  (Current department: " + emp.getDepartment() + ")");
         String department = departmentChoice(depCode);
-        String EmpId = department.substring(0, 3) + "0" + String.valueOf(idNum);
-        Employee currentEmployee = new Employee(EmpId);
+//        Random ran = new Random();
+//        int EmpId = ran.nextInt(900) + 100;
+int id = emp.getEmployeeId();
+        Employee currentEmployee = new Employee(id);
         currentEmployee.setDepartment(department);
         currentEmployee.setFirstName(firstName);
         currentEmployee.setLastName(lastName);
         currentEmployee.setEmail(currentEmployee.getFirstName().trim() + "." + currentEmployee.getLastName().trim() + "@" + currentEmployee.getDepartment() + ".mycompany.com");
-        currentEmployee.setPassword(randomPassword());
-        currentEmployee.setEmployeeId(EmpId);
+        currentEmployee.setPassword(emp.getPassword());
+        currentEmployee.setEmployeeId(id);
         idNum++;
         displayEmployee(currentEmployee);
         return currentEmployee;
@@ -122,7 +126,7 @@ public class EmailView {
 
         } else {
             for (Employee currentEmployee : employeeList) {
- io.print(currentEmployee.getEmployeeId() + ": "
+                io.print(currentEmployee.getEmployeeId() + ": "
                         + currentEmployee.getFirstName() + " " + currentEmployee.getLastName()
                 );
             }
@@ -131,8 +135,8 @@ public class EmailView {
         io.readString("Please hit enter to continue");
     }
 
-    public String getEmployeeIdChoice() {
-        return io.readString("▶▶▶Please enter employee ID◀◀◀");
+    public int getEmployeeIdChoice() {
+        return io.readInt("▶▶▶Please enter employee ID◀◀◀");
     }
 
     public void displayEmployee(Employee employee) {
